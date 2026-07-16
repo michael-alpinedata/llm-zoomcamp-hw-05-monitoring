@@ -1,0 +1,7 @@
+[project]
+name = "llm-zoomcamp-hw-05-monitoring"
+version = "0.1.0"
+description = "Code for homework 5 Monitoring from LLM Zoomcamp by DataTalks.Club"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
