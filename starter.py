@@ -1,14 +1,17 @@
-"""Starter code for the monitoring homework.
+"""Starter code for the monitoring homework (version Gemini).
 
-Sets up the text-search RAG from homework 1 and a shared OpenAI client.
+Sets up the text-search RAG from homework 1 and a shared genai client.
 """
 
-from openai import OpenAI
+from dotenv import load_dotenv
+from google import genai
 
 from gitsource import GithubRepositoryDataReader
 from minsearch import Index
 
 from rag_helper import RAGBase
+
+load_dotenv()
 
 COMMIT = "8c1834d"
 
@@ -25,7 +28,7 @@ documents = [file.parse() for file in reader.read()]
 index = Index(text_fields=["content"], keyword_fields=["filename"])
 index.fit(documents)
 
-client = OpenAI()
+client = genai.Client()
 rag = RAGBase(index=index, llm_client=client)
 
 if __name__ == "__main__":
