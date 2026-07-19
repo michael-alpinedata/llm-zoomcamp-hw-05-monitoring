@@ -1,3 +1,5 @@
+from google.genai import types
+
 INSTRUCTIONS = '''
 Your task is to answer questions from the course participants
 based on the provided context.
@@ -23,7 +25,7 @@ class RAGBase:
         llm_client,
         instructions=INSTRUCTIONS,
         prompt_template=PROMPT_TEMPLATE,
-        model='gpt-5.4-mini'
+        model='gemini-3.1-flash-lite'
     ):
         self.index = index
         self.llm_client = llm_client
@@ -51,14 +53,12 @@ class RAGBase:
         )
 
     def llm(self, prompt):
-        input_messages = [
-            {'role': 'developer', 'content': self.instructions},
-            {'role': 'user', 'content': prompt}
-        ]
-
-        response = self.llm_client.responses.create(
+        response = self.llm_client.models.generate_content(
             model=self.model,
-            input=input_messages
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                system_instruction=self.instructions
+            )
         )
 
         return response
@@ -67,4 +67,4 @@ class RAGBase:
         search_results = self.search(query)
         prompt = self.build_prompt(query, search_results)
         response = self.llm(prompt)
-        return response.output_text
+        return response.text
