@@ -35,7 +35,9 @@ uv add gitsource minsearch openai python-dotenv
 
 We want everyone to start with the same code, so we prepared a starter package.
 
-Download it:
+Use the one at the root of the repo if you use Gemini.
+
+Or download it if you use OpenAI:
 
 ```bash
 PREFIX=https://raw.githubusercontent.com/DataTalksClub/llm-zoomcamp/main/cohorts/2026/05-monitoring
@@ -45,13 +47,16 @@ wget $PREFIX/starter.py
 
 We keep things simpler and focus only on RAG. However, all the concepts could be directly translated to agents.
 
-Next, you need to put your OpenAI key in a `.env` file:
+Next, use .env.example for your GEMINI_API_KEY in a `.env` file
+```bash 
+cp .env.example .env
+```
+
+or if you use OpenAI, put your OpenAI key in a `.env` file:
 
 ```
 OPENAI_API_KEY=sk-...
 ```
-
-Like previously, you can use any alternative you want.
 
 The starter loads the 72 course lessons, builds a text-search index,
 and wraps it in a `RAGBase` instance you can call right away:
@@ -163,9 +168,9 @@ Run this query:
 The console exporter prints every finished span as a dictionary.
 Count the spans in the console output - each one is a separate
 `ReadableSpan` entry. How many spans does the trace produce?
-
+![q1](q1.png)
 * 1
-* 3
+* X 3
 * 5
 * 7
 
