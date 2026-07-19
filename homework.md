@@ -209,10 +209,10 @@ Each span automatically records its duration. Look at the console output
 from Q1 and find the durations for the `search` span and the `llm` span.
 
 For a typical query, roughly how long does the LLM call take?
-
+![q3](q3.png)
 * Under 100ms
 * 100-500ms
-* 500-2000ms
+* X 500-2000ms
 * Over 2000ms
 
 > The first call can be slower (cold start). Pick the range you see
