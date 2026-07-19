@@ -355,8 +355,8 @@ total in the database). Then compute the input tokens for each `llm`
 span.
 
 How much do the input tokens vary across these 4 runs?
-
-* They're identical
+![q6](q6.png)
+* X They're identical
 * Within 10% of each other
 * Within 50% of each other
 * They vary more than 50%
@@ -393,54 +393,7 @@ Frameworks like
 take it even further: you get a hosted dashboard, automatic
 instrumentation for Pydantic AI agents, and structured logging - all
 with minimal code. We used Logfire in the
-[dlt workshop homework](../workshops/dlt/homework.md), where we
+dlt workshop homework, where we
 instrumented an agent and pulled the traces back out with dlt. This
 homework is the manual version of the same idea: same OTel standard
 underneath, just more hands-on.
-
-## Learning in Public
-
-We encourage everyone to share what they learned. This is called "learning in public".
-
-Read more about the benefits [here](https://alexeyondata.substack.com/p/benefits-of-learning-in-public-and) and in the [course's learning in public guide](https://datatalks.club/docs/courses/zoomcamp-logistics/learning-in-public/).
-
-### Example post for LinkedIn
-
-Tag [@Alexey Grigorev](https://www.linkedin.com/in/agrigorev/) and [@DataTalksClub](https://www.linkedin.com/company/datatalks-club/) in your post - we'll like and comment to give your post more reach.
-
-```
-Module 5 of LLM Zoomcamp by @DataTalksClub complete!
-
-Just finished Module 5 - Monitoring. Learned how to:
-
-- Instrument a RAG system with OpenTelemetry
-- Capture tokens, cost, and response time as span attributes
-- Write a custom SQLite span exporter
-- Build a dashboard from trace data
-
-Here's my homework solution: <LINK>
-
-Following along with this amazing free course by @Alexey Grigorev - who else is learning to build with LLMs?
-
-You can sign up here: https://github.com/DataTalksClub/llm-zoomcamp/
-```
-
-### Example post for X
-
-```
-Module 5 of LLM Zoomcamp done!
-
-- OpenTelemetry instrumentation
-- Metrics as span attributes
-- Custom SQLite span exporter
-- Dashboard from trace data
-
-My solution: <LINK>
-
-Free course by @Al_Grigor & @DataTalksClub: https://github.com/DataTalksClub/llm-zoomcamp/
-```
-
-## Submit the results
-
-* Submit your results here: https://courses.datatalks.club/llm-zoomcamp-2026/homework/hw5
-* It's possible your answers won't match exactly. If so, select the closest one.
