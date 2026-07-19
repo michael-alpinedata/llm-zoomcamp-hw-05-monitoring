@@ -48,7 +48,7 @@ provider = TracerProvider()
 # the Console Span Exporter for q1 to q3: 
 # provider.add_span_processor(SimpleSpanProcessor(ConsoleSpanExporter()))
 
-# the Sqlite Span Exporter for Q4 (to persist traces in a DB)
+# the Sqlite Span Exporter for q4-q5 (to persist traces in a DB)
 provider.add_span_processor(SimpleSpanProcessor(SQLiteSpanExporter("traces.db")))
 
 trace.set_tracer_provider(provider)

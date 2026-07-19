@@ -323,9 +323,23 @@ The `rag` span wraps everything, so its duration includes both
 
 Using SQL (or pandas), compute the total duration for each span name
 excluding `rag`. Which span type takes the most total time?
+```python
+import sqlite3
 
+conn = sqlite3.connect("traces.db")
+# divide by 1 M to be in milliseconds
+cur = conn.execute("""
+    SELECT name, SUM(end_time - start_time)/1000000. AS total_duration
+    FROM spans
+    WHERE name != 'rag'
+    GROUP BY name;
+""")
+for row in cur.fetchall():
+    print(row)
+```
+![q5](q5.png)
 * `search`
-* `llm`
+* X `llm`
 * They're all about the same
 
 ## Q6. Token stability across runs
