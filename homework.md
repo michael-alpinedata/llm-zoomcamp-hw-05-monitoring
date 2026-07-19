@@ -298,9 +298,18 @@ provider.add_span_processor(
 
 Re-run the query from Q1. Which span names appear in the `spans` table?
 
+```python
+import sqlite3
+
+conn = sqlite3.connect("traces.db")
+cur = conn.execute("SELECT DISTINCT name FROM spans;")
+for row in cur.fetchall():
+    print(row)
+```
+![q4](q4.png)
 * Only `rag`
 * `rag` and `llm`
-* `rag`, `search`, and `llm`
+* X `rag`, `search`, and `llm`
 * `search`, `llm`, and `judge`
 
 ## Q5. Querying trace data

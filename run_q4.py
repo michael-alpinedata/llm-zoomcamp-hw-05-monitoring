@@ -1,9 +1,56 @@
 from opentelemetry import trace
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import ConsoleSpanExporter, SimpleSpanProcessor
+from opentelemetry.sdk.trace.export import SpanExporter, SpanExportResult
+
+import sqlite3
+
+class SQLiteSpanExporter(SpanExporter):
+    def __init__(self, db_path="traces.db"):
+        self.conn = sqlite3.connect(db_path)
+        self.conn.execute("""
+            CREATE TABLE IF NOT EXISTS spans (
+                name TEXT,
+                start_time INTEGER,
+                end_time INTEGER,
+                input_tokens INTEGER,
+                output_tokens INTEGER,
+                cost REAL
+            )
+        """)
+        self.conn.commit()
+
+    def export(self, spans):
+        for span in spans:
+            attrs = dict(span.attributes or {})
+            self.conn.execute(
+                "INSERT INTO spans VALUES (?, ?, ?, ?, ?, ?)",
+                (
+                    span.name,
+                    span.start_time,
+                    span.end_time,
+                    attrs.get("input_tokens"),
+                    attrs.get("output_tokens"),
+                    attrs.get("cost"),
+                ),
+            )
+        self.conn.commit()
+        return SpanExportResult.SUCCESS
+
+    def shutdown(self):
+        self.conn.close()
+
+    def force_flush(self):
+        return True
+
 
 provider = TracerProvider()
-provider.add_span_processor(SimpleSpanProcessor(ConsoleSpanExporter()))
+# the Console Span Exporter for q1 to q3: 
+# provider.add_span_processor(SimpleSpanProcessor(ConsoleSpanExporter()))
+
+# the Sqlite Span Exporter for Q4 (to persist traces in a DB)
+provider.add_span_processor(SimpleSpanProcessor(SQLiteSpanExporter("traces.db")))
+
 trace.set_tracer_provider(provider)
 
 tracer = trace.get_tracer("llm-zoomcamp")
