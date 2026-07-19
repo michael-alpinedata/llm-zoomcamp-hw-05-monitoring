@@ -194,9 +194,10 @@ And since we know both input and output tokens, we can also compute
 the cost using the code from the previous modules.
 
 Now re-run the query. How many input tokens do we see?
+![q2](q2.png)
 
 * 700
-* 7000
+* X 7000
 * 70000
 * 700000
 
